@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI志愿规划助手｜AI Product Demo</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#f6f8fb;
+    --card:#ffffff;
+    --text:#172033;
+    --sub:#667085;
+    --line:#e6eaf0;
+    --primary:#315efb;
+    --primary-light:#eef3ff;
+    --rush:#ef5b5b;
+    --rush-bg:#fff3f3;
+    --stable:#e89432;
+    --stable-bg:#fff7ed;
+    --safe:#20a464;
+    --safe-bg:#effaf4;
+    --shadow:0 8px 30px rgba(16,24,40,.06);
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "PingFang SC",
+        "Microsoft YaHei",
+        Arial,
+        sans-serif;
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+.container{
+    width:1180px;
+    max-width:calc(100% - 48px);
+    margin:0 auto;
+}
+
+/* =========================
+   Header
+========================= */
+
+.nav{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:16px;
+    font-weight:700;
+}
+
+.logo-icon{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    background:linear-gradient(135deg,#315efb,#7b61ff);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+}
+
+.nav-right{
+    font-size:13px;
+    color:#8a94a6;
+}
+
+/* =========================
+   Hero
+========================= */
+
+.hero{
+    padding:60px 0 46px;
+    text-align:center;
+}
+
+.hero-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:6px 12px;
+    border-radius:999px;
+    background:var(--primary-light);
+    color:var(--primary);
+    font-size:12px;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--primary);
+}
+
+.hero h1{
+    font-size:42px;
+    line-height:1.2;
+    letter-spacing:-1px;
+    margin:0;
+}
+
+.hero h1 span{
+    color:var(--primary);
+}
+
+.hero p{
+    max-width:650px;
+    margin:18px auto 0;
+    color:var(--sub);
+    font-size:15px;
+    line-height:1.8;
+}
+
+/* =========================
+   Capability
+========================= */
+
+.capabilities{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:28px;
+}
+
+.capability{
+    background:white;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px;
+}
+
+.capability-num{
+    font-size:11px;
+    color:var(--primary);
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.capability-title{
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:5px;
+}
+
+.capability-desc{
+    font-size:12px;
+    line-height:1.6;
+    color:var(--sub);
+}
+
+/* =========================
+   Main Card
+========================= */
+
+.main-card{
+    background:white;
+    border:1px solid var(--line);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+.card-header{
+    padding:24px 28px;
+    border-bottom:1px solid var(--line);
+}
+
+.card-title{
+    font-size:18px;
+    font-weight:700;
+}
+
+.card-subtitle{
+    margin-top:6px;
+    color:var(--sub);
+    font-size:13px;
+}
+
+.form{
+    padding:28px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.field label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.field input{
+    width:100%;
+    height:46px;
+    border:1px solid #d9dee8;
+    border-radius:9px;
+    padding:0 13px;
+    outline:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.field input:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 3px rgba(49,94,251,.08);
+}
+
+.field-tip{
+    margin-top:6px;
+    font-size:11px;
+    color:#98a2b3;
+}
+
+.form-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:25px;
+}
+
+.form-note{
+    font-size:12px;
+    color:#98a2b3;
+}
+
+.btn{
+    border:0;
+    height:46px;
+    padding:0 26px;
+    border-radius:9px;
+    background:var(--primary);
+    color:white;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn:hover{
+    background:#244ce0;
+    transform:translateY(-1px);
+}
+
+.btn:disabled{
+    background:#98a2b3;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* =========================
+   Status
+========================= */
+
+.status{
+    display:none;
+    margin:0 28px 22px;
+    padding:12px 15px;
+    border-radius:8px;
+    font-size:13px;
+    white-space:pre-wrap;
+}
+
+.status.show{
+    display:block;
+}
+
+.status.error{
+    background:#fff1f1;
+    color:#c03939;
+}
+
+.status.success{
+    background:#effaf4;
+    color:#18794e;
+}
+
+/* =========================
+   Loading
+========================= */
+
+.loading{
+    display:none;
+    text-align:center;
+    padding:45px 20px;
+}
+
+.loading.show{
+    display:block;
+}
+
+.spinner{
+    width:30px;
+    height:30px;
+    margin:0 auto 14px;
+    border:3px solid #e4eaff;
+    border-top-color:var(--primary);
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+
+.loading-title{
+    font-size:14px;
+    font-weight:600;
+}
+
+.loading-desc{
+    margin-top:6px;
+    color:var(--sub);
+    font-size:12px;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
+
+/* =========================
+   Results
+========================= */
+
+#resultArea{
+    display:none;
+    margin-top:28px;
+}
+
+#resultArea.show{
+    display:block;
+}
+
+.result-top{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    margin-bottom:16px;
+}
+
+.result-title{
+    font-size:21px;
+    font-weight:700;
+}
+
+.result-desc{
+    margin-top:5px;
+    color:var(--sub);
+    font-size:12px;
+}
+
+.result-tag{
+    font-size:11px;
+    color:#667085;
+    background:#f2f4f7;
+    padding:6px 10px;
+    border-radius:6px;
+}
+
+/* condition */
+
+.condition{
+    background:#f8faff;
+    border:1px solid #e5ebff;
+    border-radius:12px;
+    padding:16px 20px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:25px;
+    margin-bottom:20px;
+}
+
+.condition-item{
+    font-size:13px;
+}
+
+.condition-label{
+    color:#8a94a6;
+    margin-right:5px;
+}
+
+/* tiers */
+
+.tier{
+    margin-bottom:18px;
+}
+
+.tier-header{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-bottom:10px;
+}
+
+.tier-title{
+    font-size:16px;
+    font-weight:700;
+}
+
+.tier-desc{
+    font-size:11px;
+    color:#98a2b3;
+}
+
+.tier-line{
+    flex:1;
+    height:1px;
+    background:var(--line);
+}
+
+.school-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:13px;
+}
+
+.school{
+    background:white;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px;
+    transition:.2s;
+}
+
+.school:hover{
+    box-shadow:0 7px 20px rgba(16,24,40,.06);
+    transform:translateY(-2px);
+}
+
+.school-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:5px;
+    font-size:10px;
+    font-weight:700;
+}
+
+.badge-rush{
+    background:var(--rush-bg);
+    color:var(--rush);
+}
+
+.badge-stable{
+    background:var(--stable-bg);
+    color:var(--stable);
+}
+
+.badge-safe{
+    background:var(--safe-bg);
+    color:var(--safe);
+}
+
+.school-name{
+    font-size:17px;
+    font-weight:700;
+    margin-top:9px;
+}
+
+.school-city{
+    font-size:12px;
+    color:#8a94a6;
+    margin-top:4px;
+}
+
+.match{
+    text-align:right;
+}
+
+.match-number{
+    font-size:21px;
+    font-weight:700;
+    color:var(--primary);
+}
+
+.match-label{
+    font-size:10px;
+    color:#98a2b3;
+}
+
+.school-major{
+    margin-top:15px;
+    padding:10px 12px;
+    background:#f8fafc;
+    border-radius:7px;
+    font-size:12px;
+    color:#475467;
+}
+
+.metrics{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:10px;
+}
+
+.metric{
+    background:#fafafa;
+    border-radius:7px;
+    padding:9px;
+}
+
+.metric-label{
+    color:#98a2b3;
+    font-size:10px;
+}
+
+.metric-value{
+    margin-top:4px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.reason{
+    border-top:1px solid var(--line);
+    margin-top:13px;
+    padding-top:12px;
+    font-size:12px;
+    color:#667085;
+    line-height:1.6;
+}
+
+.empty{
+    border:1px dashed #d8dee8;
+    border-radius:10px;
+    padding:20px;
+    text-align:center;
+    color:#98a2b3;
+    font-size:12px;
+}
+
+/* =========================
+   Analysis
+========================= */
+
+.analysis{
+    margin-top:24px;
+    background:white;
+    border:1px solid var(--line);
+    border-radius:15px;
+    padding:24px;
+}
+
+.analysis-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.analysis-title{
+    font-size:17px;
+    font-weight:700;
+}
+
+.analysis-label{
+    font-size:11px;
+    color:var(--primary);
+    background:var(--primary-light);
+    padding:5px 9px;
+    border-radius:5px;
+}
+
+.analysis-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.analysis-item{
+    background:#f8fafc;
+    border-radius:10px;
+    padding:16px;
+}
+
+.analysis-item-title{
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.analysis-text{
+    color:#667085;
+    font-size:12px;
+    line-height:1.7;
+}
+
+/* =========================
+   Logic
+========================= */
+
+.logic{
+    margin-top:18px;
+    background:#111827;
+    color:white;
+    border-radius:15px;
+    padding:24px;
+}
+
+.logic-title{
+    font-size:15px;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.logic-flow{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:8px;
+}
+
+.logic-step{
+    position:relative;
+    background:#1f2937;
+    border:1px solid #374151;
+    border-radius:8px;
+    padding:13px;
+}
+
+.logic-num{
+    font-size:10px;
+    color:#93c5fd;
+    margin-bottom:7px;
+}
+
+.logic-name{
+    font-size:12px;
+    font-weight:600;
+}
+
+.logic-arrow{
+    position:absolute;
+    right:-7px;
+    top:50%;
+    color:#6b7280;
+    z-index:2;
+}
+
+/* =========================
+   Footer
+========================= */
+
+.footer{
+    text-align:center;
+    padding:35px 0 50px;
+    color:#98a2b3;
+    font-size:11px;
+}
+
+@media(max-width:850px){
+
+    .container{
+        max-width:calc(100% - 28px);
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .capabilities{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .form-grid,
+    .school-grid,
+    .analysis-grid{
+        grid-template-columns:1fr;
+    }
+
+    .logic-flow{
+        grid-template-columns:1fr;
+    }
+
+    .logic-arrow{
+        display:none;
+    }
+
+    .form-footer{
+        align-items:stretch;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .btn{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- =========================
+         导航
+    ========================== -->
+
+    <div class="nav">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                AI
+            </div>
+
+            <div>
+                AI志愿规划助手
+            </div>
+
+        </div>
+
+        <div class="nav-right">
+            AI Product MVP · Portfolio Demo
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         Hero
+    ========================== -->
+
+    <section class="hero">
+
+        <div class="hero-tag">
+            <span class="dot"></span>
+            AI志愿规划智能服务
+        </div>
+
+        <h1>
+            让复杂的志愿决策
+            <span>更清晰</span>
+        </h1>
+
+        <p>
+            基于高考分数、选科、专业与城市偏好，
+            结合院校知识库进行多条件匹配，
+            输出结构化的冲刺、稳妥与保底志愿方案。
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         产品能力
+    ========================== -->
+
+    <div class="capabilities">
+
+        <div class="capability">
+
+            <div class="capability-num">
+                01 / INPUT
+            </div>
+
+            <div class="capability-title">
+                多维条件输入
+            </div>
+
+            <div class="capability-desc">
+                分数、选科、专业、城市等核心决策条件。
+            </div>
+
+        </div>
+
+
+        <div class="capability">
+
+            <div class="capability-num">
+                02 / RAG
+            </div>
+
+            <div class="capability-title">
+                院校知识检索
+            </div>
+
+            <div class="capability-desc">
+                从院校知识库检索符合条件的真实数据。
+            </div>
+
+        </div>
+
+
+        <div class="capability">
+
+            <div class="capability-num">
+                03 / AI
+            </div>
+
+            <div class="capability-title">
+                智能匹配分析
+            </div>
+
+            <div class="capability-desc">
+                基于规则与 LLM 对候选院校进行分析。
+            </div>
+
+        </div>
+
+
+        <div class="capability">
+
+            <div class="capability-num">
+                04 / OUTPUT
+            </div>
+
+            <div class="capability-title">
+                结构化决策结果
+            </div>
+
+            <div class="capability-desc">
+                输出冲刺、稳妥、保底及推荐理由。
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         输入
+    ========================== -->
+
+    <div class="main-card">
+
+        <div class="card-header">
+
+            <div class="card-title">
+                开始志愿规划
+            </div>
+
+            <div class="card-subtitle">
+                输入你的核心条件，AI 将从院校知识库中进行匹配分析
+            </div>
+
+        </div>
+
+
+        <div class="form">
+
+            <div class="form-grid">
+
+                <div class="field">
+
+                    <label>
+                        高考分数
+                    </label>
+
+                    <input
+                        id="score"
+                        type="number"
+                        min="0"
+                        max="750"
+                        placeholder="例如 620"
+                    >
+
+                    <div class="field-tip">
+                        输入高考总分
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        选科
+                    </label>
+
+                    <input
+                        id="subject"
+                        type="text"
+                        placeholder="例如 物理化学"
+                    >
+
+                    <div class="field-tip">
+                        例如：物理化学、物理生物
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        意向城市
+                    </label>
+
+                    <input
+                        id="city"
+                        type="text"
+                        placeholder="例如 南京（可不填写）"
+                    >
+
+                    <div class="field-tip">
+                        不填写则不限制城市
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        意向专业
+                    </label>
+
+                    <input
+                        id="major"
+                        type="text"
+                        placeholder="例如 计算机"
+                    >
+
+                    <div class="field-tip">
+                        输入希望重点考虑的专业方向
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-footer">
+
+                <div class="form-note">
+                    AI 推荐仅用于方案参考，具体招生信息以当年官方数据为准。
+                </div>
+
+                <button
+                    id="submitBtn"
+                    class="btn"
+                    onclick="startPlanning()"
+                >
+                    开始智能规划 →
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="status"
+            class="status"
+        ></div>
+
+
+        <div
+            id="loading"
+            class="loading"
+        >
+
+            <div class="spinner"></div>
+
+            <div class="loading-title">
+                AI 正在生成志愿方案
+            </div>
+
+            <div class="loading-desc">
+                正在检索院校数据并进行多条件匹配，请稍候
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         结果
+    ========================== -->
+
+    <div id="resultArea">
+
+        <div class="result-top">
+
+            <div>
+
+                <div class="result-title">
+                    AI 志愿规划结果
+                </div>
+
+                <div class="result-desc">
+                    基于当前输入条件生成的个性化匹配结果
+                </div>
+
+            </div>
+
+            <div class="result-tag">
+                Knowledge Base + LLM
+            </div>
+
+        </div>
+
+
+        <!-- 用户条件 -->
+
+        <div
+            id="conditionArea"
+            class="condition"
+        ></div>
+
+
+        <!-- 冲刺 -->
+
+        <div class="tier">
+
+            <div class="tier-header">
+
+                <div class="tier-title">
+                    冲刺
+                </div>
+
+                <div class="tier-desc">
+                    分数低于院校投档线
+                </div>
+
+                <div class="tier-line"></div>
+
+            </div>
+
+            <div
+                id="rushList"
+                class="school-grid"
+            ></div>
+
+        </div>
+
+
+        <!-- 稳妥 -->
+
+        <div class="tier">
+
+            <div class="tier-header">
+
+                <div class="tier-title">
+                    稳妥
+                </div>
+
+                <div class="tier-desc">
+                    分数与投档线较为匹配
+                </div>
+
+                <div class="tier-line"></div>
+
+            </div>
+
+            <div
+                id="stableList"
+                class="school-grid"
+            ></div>
+
+        </div>
+
+
+        <!-- 保底 -->
+
+        <div class="tier">
+
+            <div class="tier-header">
+
+                <div class="tier-title">
+                    保底
+                </div>
+
+                <div class="tier-desc">
+                    分数明显高于院校投档线
+                </div>
+
+                <div class="tier-line"></div>
+
+            </div>
+
+            <div
+                id="safeList"
+                class="school-grid"
+            ></div>
+
+        </div>
+
+
+        <!-- =========================
+             AI 分析
+        ========================== -->
+
+        <div class="analysis">
+
+            <div class="analysis-header">
+
+                <div class="analysis-title">
+                    AI 决策分析
+                </div>
+
+                <div class="analysis-label">
+                    STRUCTURED OUTPUT
+                </div>
+
+            </div>
+
+
+            <div
+                id="analysisArea"
+                class="analysis-grid"
+            ></div>
+
+        </div>
+
+
+        <!-- =========================
+             AI逻辑
+        ========================== -->
+
+        <div class="logic">
+
+            <div class="logic-title">
+                本次规划的 AI 决策逻辑
+            </div>
+
+            <div class="logic-flow">
+
+                <div class="logic-step">
+
+                    <div class="logic-num">
+                        STEP 01
+                    </div>
+
+                    <div class="logic-name">
+                        用户条件解析
+                    </div>
+
+                    <div class="logic-arrow">
+                        →
+                    </div>
+
+                </div>
+
+
+                <div class="logic-step">
+
+                    <div class="logic-num">
+                        STEP 02
+                    </div>
+
+                    <div class="logic-name">
+                        知识库检索
+                    </div>
+
+                    <div class="logic-arrow">
+                        →
+                    </div>
+
+                </div>
+
+
+                <div class="logic-step">
+
+                    <div class="logic-num">
+                        STEP 03
+                    </div>
+
+                    <div class="logic-name">
+                        选科 / 专业 / 城市匹配
+                    </div>
+
+                    <div class="logic-arrow">
+                        →
+                    </div>
+
+                </div>
+
+
+                <div class="logic-step">
+
+                    <div class="logic-num">
+                        STEP 04
+                    </div>
+
+                    <div class="logic-name">
+                        分数差分档
+                    </div>
+
+                    <div class="logic-arrow">
+                        →
+                    </div>
+
+                </div>
+
+
+                <div class="logic-step">
+
+                    <div class="logic-num">
+                        STEP 05
+                    </div>
+
+                    <div class="logic-name">
+                        结构化输出
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        AI志愿规划智能服务 · AI Product Manager Portfolio Demo
+    </div>
+
+</div>
+
+
+<script>
+
+
+
+
+/* ==========================================================
+   开始规划
+========================================================== */
+
+async function startPlanning(){
+
+    const score =
+        Number(
+            document.getElementById("score").value
+        );
+
+    const subject =
+        document
+            .getElementById("subject")
+            .value
+            .trim();
+
+    const city =
+        document
+            .getElementById("city")
+            .value
+            .trim();
+
+    const major =
+        document
+            .getElementById("major")
+            .value
+            .trim();
+
+
+    // =========================
+    // 输入校验
+    // =========================
+
+    if(!score){
+
+        showStatus(
+            "请输入高考分数。",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(!subject){
+
+        showStatus(
+            "请输入选科。",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(!major){
+
+        showStatus(
+            "请输入意向专业。",
+            "error"
+        );
+
+        return;
+    }
+
+
+    // =========================
+    // 按钮状态
+    // =========================
+
+    const button =
+        document.getElementById(
+            "submitBtn"
+        );
+
+    button.disabled = true;
+
+
+    document
+        .getElementById("loading")
+        .classList.add("show");
+
+
+    document
+        .getElementById("resultArea")
+        .classList.remove("show");
+
+
+    document
+        .getElementById("status")
+        .classList.remove("show");
+
+
+    try{
+
+        // =========================
+        // 调用自己的后端
+        // =========================
+
+        const response =
+            await fetch(
+                "/api/plan",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            score,
+                            subject,
+                            city,
+                            major
+                        })
+
+                }
+            );
+
+
+        // =========================
+        // 获取返回结果
+        // =========================
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "Backend Response:",
+            result
+        );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                result.message ||
+                result.error ||
+                "AI规划请求失败"
+            );
+
+        }
+
+
+        // =========================
+        // 解析结构化结果
+        // =========================
+
+        const data =
+            extractStructuredData(
+                result
+            );
+
+
+        if(!data){
+
+            throw new Error(
+                "AI 已返回结果，但没有找到结构化输出。"
+            );
+
+        }
+
+
+        // =========================
+        // 渲染结果
+        // =========================
+
+        renderResult(data);
+
+
+        showStatus(
+            "AI 志愿规划完成。",
+            "success"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "规划失败：",
+            error
+        );
+
+
+        showStatus(
+            error.message ||
+            "AI规划请求失败，请稍后重试。",
+            "error"
+        );
+
+
+    }finally{
+
+        button.disabled = false;
+
+
+        document
+            .getElementById("loading")
+            .classList.remove("show");
+
+    }
+
+}
+
+
+/* ==========================================================
+   解析 Dify 返回结果
+========================================================== */
+
+function extractStructuredData(result){
+
+    /*
+        你的实际返回结构：
+
+        result
+        └── data
+            └── outputs
+                └── data
+                    ├── user_condition
+                    ├── recommendations
+                    └── analysis
+    */
+
+
+    if(
+        result &&
+        result.data &&
+        result.data.outputs &&
+        result.data.outputs.data
+    ){
+
+        const data =
+            result.data.outputs.data;
+
+
+        if(
+            data.user_condition &&
+            data.recommendations &&
+            data.analysis
+        ){
+
+            return data;
+
+        }
+
+    }
+
+
+    /* 兼容 outputs 直接返回结构化结果 */
+
+    if(
+        result &&
+        result.data &&
+        result.data.outputs
+    ){
+
+        const outputs =
+            result.data.outputs;
+
+
+        if(
+            outputs.user_condition &&
+            outputs.recommendations &&
+            outputs.analysis
+        ){
+
+            return outputs;
+
+        }
+
+
+        if(
+            outputs.structured_output &&
+            typeof outputs.structured_output ===
+            "object"
+        ){
+
+            return outputs.structured_output;
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* ==========================================================
+   渲染结果
+========================================================== */
+
+function renderResult(data){
+
+    document
+        .getElementById("resultArea")
+        .classList.add("show");
+
+
+    renderCondition(
+        data.user_condition
+    );
+
+
+    renderTier(
+        "rushList",
+        data.recommendations?.rush || [],
+        "rush"
+    );
+
+
+    renderTier(
+        "stableList",
+        data.recommendations?.stable || [],
+        "stable"
+    );
+
+
+    renderTier(
+        "safeList",
+        data.recommendations?.safe || [],
+        "safe"
+    );
+
+
+    renderAnalysis(
+        data.analysis || {}
+    );
+
+}
+
+
+/* ==========================================================
+   用户条件
+========================================================== */
+
+function renderCondition(condition){
+
+    const area =
+        document.getElementById(
+            "conditionArea"
+        );
+
+
+    area.innerHTML = `
+
+        <div class="condition-item">
+
+            <span class="condition-label">
+                分数
+            </span>
+
+            <strong>
+                ${escapeHTML(
+                    condition.score ?? "-"
+                )}
+            </strong>
+
+        </div>
+
+
+        <div class="condition-item">
+
+            <span class="condition-label">
+                选科
+            </span>
+
+            <strong>
+                ${escapeHTML(
+                    condition.subject || "-"
+                )}
+            </strong>
+
+        </div>
+
+
+        <div class="condition-item">
+
+            <span class="condition-label">
+                城市
+            </span>
+
+            <strong>
+                ${
+                    condition.city
+                    ?
+                    escapeHTML(condition.city)
+                    :
+                    "不限"
+                }
+            </strong>
+
+        </div>
+
+
+        <div class="condition-item">
+
+            <span class="condition-label">
+                专业
+            </span>
+
+            <strong>
+                ${escapeHTML(
+                    condition.major || "-"
+                )}
+            </strong>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ==========================================================
+   冲稳保
+========================================================== */
+
+function renderTier(
+    elementId,
+    schools,
+    type
+){
+
+    const area =
+        document.getElementById(
+            elementId
+        );
+
+
+    if(
+        !schools ||
+        schools.length === 0
+    ){
+
+        area.innerHTML = `
+
+            <div class="empty">
+                当前知识库中没有符合条件的院校
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    area.innerHTML =
+        schools
+            .map(
+                school =>
+                    createSchoolCard(
+                        school,
+                        type
+                    )
+            )
+            .join("");
+
+}
+
+
+/* ==========================================================
+   院校卡片
+========================================================== */
+
+function createSchoolCard(
+    school,
+    type
+){
+
+    let badgeClass =
+        "badge-rush";
+
+    let badgeText =
+        "冲刺";
+
+
+    if(type === "stable"){
+
+        badgeClass =
+            "badge-stable";
+
+        badgeText =
+            "稳妥";
+
+    }
+
+
+    if(type === "safe"){
+
+        badgeClass =
+            "badge-safe";
+
+        badgeText =
+            "保底";
+
+    }
+
+
+    const diff =
+        Number(
+            school.score_diff
+        );
+
+
+    let diffText =
+        "-";
+
+
+    if(!Number.isNaN(diff)){
+
+        diffText =
+            diff > 0
+            ?
+            "+" + diff
+            :
+            String(diff);
+
+    }
+
+
+    return `
+
+        <div class="school">
+
+            <div class="school-top">
+
+                <div>
+
+                    <span
+                        class="badge ${badgeClass}"
+                    >
+                        ${badgeText}
+                    </span>
+
+                    <div class="school-name">
+                        ${escapeHTML(
+                            school.school_name || "-"
+                        )}
+                    </div>
+
+                    <div class="school-city">
+                        ${escapeHTML(
+                            school.city || "-"
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="match">
+
+                    <div class="match-number">
+                        ${
+                            school.match_score ??
+                            "-"
+                        }
+                    </div>
+
+                    <div class="match-label">
+                        综合匹配度
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="school-major">
+
+                <strong>
+                    推荐专业
+                </strong>
+
+                <br>
+
+                ${escapeHTML(
+                    school.major || "-"
+                )}
+
+            </div>
+
+
+            <div class="metrics">
+
+                <div class="metric">
+
+                    <div class="metric-label">
+                        院校投档线
+                    </div>
+
+                    <div class="metric-value">
+                        ${
+                            school.score_line ??
+                            "-"
+                        }
+                    </div>
+
+                </div>
+
+
+                <div class="metric">
+
+                    <div class="metric-label">
+                        分数差
+                    </div>
+
+                    <div class="metric-value">
+                        ${diffText}
+                    </div>
+
+                </div>
+
+
+                <div class="metric">
+
+                    <div class="metric-label">
+                        选科要求
+                    </div>
+
+                    <div class="metric-value">
+                        ${escapeHTML(
+                            school.subject_requirement ||
+                            "-"
+                        )}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="reason">
+
+                <strong>
+                    AI 推荐理由：
+                </strong>
+
+                ${escapeHTML(
+                    school.reason || "-"
+                )}
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ==========================================================
+   AI分析
+========================================================== */
+
+function renderAnalysis(analysis){
+
+    const area =
+        document.getElementById(
+            "analysisArea"
+        );
+
+
+    area.innerHTML = `
+
+        <div class="analysis-item">
+
+            <div class="analysis-item-title">
+                专业匹配
+            </div>
+
+            <div class="analysis-text">
+                ${escapeHTML(
+                    analysis.major_analysis ||
+                    "-"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="analysis-item">
+
+            <div class="analysis-item-title">
+                城市匹配
+            </div>
+
+            <div class="analysis-text">
+                ${escapeHTML(
+                    analysis.city_analysis ||
+                    "-"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="analysis-item">
+
+            <div class="analysis-item-title">
+                分数分析
+            </div>
+
+            <div class="analysis-text">
+                ${escapeHTML(
+                    analysis.score_analysis ||
+                    "-"
+                )}
+            </div>
+
+        </div>
+
+
+        <div class="analysis-item">
+
+            <div class="analysis-item-title">
+                综合建议
+            </div>
+
+            <div class="analysis-text">
+                ${escapeHTML(
+                    analysis.overall_advice ||
+                    "-"
+                )}
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* ==========================================================
+   状态
+========================================================== */
+
+function showStatus(
+    message,
+    type
+){
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.className =
+        "status show " +
+        type;
+
+
+    status.textContent =
+        message;
+
+}
+
+
+/* ==========================================================
+   HTML安全处理
+========================================================== */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+</script>
+
+</body>
+</html>
