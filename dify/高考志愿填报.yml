@@ -1,0 +1,1438 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: 高考志愿填报
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/deepseek:0.0.24@9e12eef09973667f0eaf4f082af883167e1de88740b22e71e71488d020c3778a
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/tongyi:0.2.22@9cea96ffc7977f536c02999c80ff1283b1819aab9b6fa2fdf789d0c6c7d03715
+    version: null
+kind: app
+version: 0.7.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload: {}
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: start
+        targetType: if-else
+      id: 1789872627331-source-1789892725182-target
+      selected: false
+      source: '1789872627331'
+      sourceHandle: source
+      target: '1789892725182'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: knowledge-retrieval
+        targetType: variable-aggregator
+      id: 1789872794555-source-1789979375635-target
+      source: '1789872794555'
+      sourceHandle: source
+      target: '1789979375635'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: template-transform
+        targetType: knowledge-retrieval
+      id: 1789873293256-source-1789872794555-target
+      selected: false
+      source: '1789873293256'
+      sourceHandle: source
+      target: '1789872794555'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: if-else
+        targetType: template-transform
+      id: 1789892725182-false-1789895097842-target
+      selected: false
+      source: '1789892725182'
+      sourceHandle: 'false'
+      target: '1789895097842'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: if-else
+        targetType: if-else
+      id: 1789892725182-true-1789893333824-target
+      selected: false
+      source: '1789892725182'
+      sourceHandle: 'true'
+      target: '1789893333824'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: if-else
+        targetType: template-transform
+      id: 1789893333824-false-1789893406368-target
+      selected: false
+      source: '1789893333824'
+      sourceHandle: 'false'
+      target: '1789893406368'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: if-else
+        targetType: template-transform
+      id: 1789893333824-true-1789873293256-target
+      selected: false
+      source: '1789893333824'
+      sourceHandle: 'true'
+      target: '1789873293256'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: template-transform
+        targetType: knowledge-retrieval
+      id: 1789893406368-source-1789895729761-target
+      selected: false
+      source: '1789893406368'
+      sourceHandle: source
+      target: '1789895729761'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: template-transform
+        targetType: end
+      id: 1789895097842-source-1789895020354-target
+      selected: false
+      source: '1789895097842'
+      sourceHandle: source
+      target: '1789895020354'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: knowledge-retrieval
+        targetType: variable-aggregator
+      id: 1789895729761-source-1789979375635-target
+      source: '1789895729761'
+      sourceHandle: source
+      target: '1789979375635'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: llm
+        targetType: end
+      id: 1789898205275-source-1789898330788-target
+      selected: false
+      source: '1789898205275'
+      sourceHandle: source
+      target: '1789898330788'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        iteration_id: null
+        loop_id: null
+        sourceType: variable-aggregator
+        targetType: llm
+      id: 1789979375635-source-1789898205275-target
+      source: '1789979375635'
+      sourceHandle: source
+      target: '1789898205275'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: 分数
+          options: []
+          placeholder: ''
+          required: true
+          type: number
+          variable: score
+        - default: ''
+          hint: ''
+          label: 选科
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: subject
+        - default: ''
+          hint: ''
+          label: 意向城市
+          options: []
+          placeholder: ''
+          required: false
+          type: text-input
+          variable: city
+        - default: ''
+          hint: ''
+          label: 意向专业
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: major
+      height: 185
+      id: '1789872627331'
+      position:
+        x: -538.5348435248083
+        y: 197.94525456163927
+      positionAbsolute:
+        x: -538.5348435248083
+        y: 197.94525456163927
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        dataset_ids:
+        - P+RW4x4PLqdQLP2RYeh36D73LC+H4t6V64slbTclr4lBCpOeTyX9xp7brPetnezz
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: qwen3-rerank
+            provider: langgenius/tongyi/tongyi
+          score_threshold: null
+          top_k: 10
+          weights:
+            keyword_setting:
+              keyword_weight: 0.3
+            vector_setting:
+              embedding_model_name: text-embedding-v4
+              embedding_provider_name: langgenius/tongyi/tongyi
+              vector_weight: 0.7
+            weight_type: customized
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1789873293256'
+        - output
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索
+        type: knowledge-retrieval
+      height: 88
+      id: '1789872794555'
+      position:
+        x: 1215.827405665564
+        y: 160.2173016244287
+      positionAbsolute:
+        x: 1215.827405665564
+        y: 160.2173016244287
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        selected: false
+        template: "江苏高考检索\r\n分数{{score}}，选科{{subject}}，意向城市{{city}}，意向专业{{major}}\r\
+          \n"
+        title: 模板转换
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1789872627331'
+          - score
+          value_type: string
+          variable: score
+        - value_selector:
+          - '1789872627331'
+          - subject
+          value_type: string
+          variable: subject
+        - value_selector:
+          - '1789872627331'
+          - city
+          value_type: string
+          variable: city
+        - value_selector:
+          - '1789872627331'
+          - major
+          value_type: string
+          variable: major
+      height: 50
+      id: '1789873293256'
+      position:
+        x: 810.2070160987182
+        y: 160.2173016244287
+      positionAbsolute:
+        x: 810.2070160987182
+        y: 160.2173016244287
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: ≤
+            id: 000b3983-cc83-4ec8-a33a-e381f27cf128
+            value: '750'
+            varType: number
+            variable_selector:
+            - '1789872627331'
+            - score
+          - comparison_operator: ≥
+            id: 8063ff67-ce7f-4bca-888a-d5e33c16e342
+            value: '0'
+            varType: number
+            variable_selector:
+            - '1789872627331'
+            - score
+          logical_operator: and
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 148
+      id: '1789892725182'
+      position:
+        x: -54.33916672877899
+        y: 410.864931098507
+      positionAbsolute:
+        x: -54.33916672877899
+        y: 410.864931098507
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: fcf1db9f-a324-4b6b-ba97-c393268d0780
+            value: ''
+            varType: string
+            variable_selector:
+            - '1789872627331'
+            - city
+          logical_operator: and
+        selected: false
+        title: 条件分支 2
+        type: if-else
+      height: 122
+      id: '1789893333824'
+      position:
+        x: 442.95116774827125
+        y: 320.95777672590015
+      positionAbsolute:
+        x: 442.95116774827125
+        y: 320.95777672590015
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        selected: false
+        template: "江苏高考检索\r\n分数{{score}}，选科{{subject}}，意向专业{{major}}"
+        title: 模板转换 2
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1789872627331'
+          - score
+          value_type: number
+          variable: score
+        - value_selector:
+          - '1789872627331'
+          - subject
+          value_type: string
+          variable: subject
+        - value_selector:
+          - '1789872627331'
+          - major
+          value_type: string
+          variable: major
+      height: 50
+      id: '1789893406368'
+      position:
+        x: 823.5423397762668
+        y: 523.0570799284737
+      positionAbsolute:
+        x: 823.5423397762668
+        y: 523.0570799284737
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1789895097842'
+          - output
+          value_type: string
+          variable: output
+        selected: false
+        title: 输出 2
+        type: end
+      height: 86
+      id: '1789895020354'
+      position:
+        x: 482.23533187125014
+        y: 889.3028909362802
+      positionAbsolute:
+        x: 482.23533187125014
+        y: 889.3028909362802
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        selected: false
+        template: 分数不在范围内
+        title: 模板转换 3
+        type: template-transform
+        variables: []
+      height: 50
+      id: '1789895097842'
+      position:
+        x: 266.07429543575813
+        y: 746.6083505442233
+      positionAbsolute:
+        x: 266.07429543575813
+        y: 746.6083505442233
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        dataset_ids:
+        - P+RW4x4PLqdQLP2RYeh36D73LC+H4t6V64slbTclr4lBCpOeTyX9xp7brPetnezz
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: qwen3-rerank
+            provider: langgenius/tongyi/tongyi
+          score_threshold: null
+          top_k: 4
+          weights: null
+        query_attachment_selector: []
+        query_variable_selector:
+        - '1789893406368'
+        - output
+        retrieval_mode: multiple
+        selected: false
+        title: 知识检索 2
+        type: knowledge-retrieval
+      height: 88
+      id: '1789895729761'
+      position:
+        x: 1215.827405665564
+        y: 523.0570799284737
+      positionAbsolute:
+        x: 1215.827405665564
+        y: 523.0570799284737
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-flash
+          provider: langgenius/deepseek/deepseek
+        model_selector: null
+        prompt_config:
+          jinja2_variables:
+          - value_selector:
+            - '1789979375635'
+            - output
+            value_type: array[object]
+            variable: output
+          - value_selector:
+            - '1789872627331'
+            - score
+            variable: score
+          - value_selector:
+            - '1789872627331'
+            - subject
+            variable: subject
+          - value_selector:
+            - '1789872627331'
+            - city
+            variable: city
+          - value_selector:
+            - '1789872627331'
+            - major
+            variable: major
+        prompt_template:
+        - edition_type: basic
+          id: aa8cc6c2-79e2-4afb-8517-999967a20db5
+          jinja2_text: "你是一名高考志愿填报信息助手。\r\n\r\n请根据用户的实际输入和知识库检索结果，为用户整理可参考的院校信息。\r\
+            \n\r\n【用户输入】\r\n高考分数：{{ score }}\r\n选科：{{ subject }}\r\n意向城市：{{ city }}\r\
+            \n意向专业：{{ major }}\r\n\r\n注意：\r\n- 意向城市为空表示用户没有限定城市，不要提示“用户未填写城市”。\r\n\
+            - 只有分数、选科、意向专业确实为空时，才提示用户补充对应信息。\r\n- 不要自行编造知识库中不存在的院校、专业、分数或招生信息。\r\n\
+            - 知识库没有相关数据时，明确说明“当前知识库没有检索到相关信息”。\r\n\r\n【知识库检索结果】\r\n{{ output }}\r\n\
+            \r\n请根据以上信息进行整理，并按照以下结构输出：\r\n\r\n一、用户条件\r\n二、冲刺院校\r\n三、稳妥院校\r\n四、保底院校\r\
+            \n五、说明筛选依据和数据来源。\r\n\r\n如果知识库数据不足以进行完整分类，就如实说明，不要编造。"
+          role: system
+          text: '# 角色
+
+
+            你是一名“江苏高考志愿规划助手”。
+
+
+            你的任务是根据：
+
+            1. 用户输入的高考分数、选科、意向城市、意向专业
+
+            2. 知识库检索结果
+
+
+            筛选符合用户条件的本科院校，并将结果划分为：
+
+            - 冲刺
+
+            - 稳妥
+
+            - 保底
+
+
+            你的最终输出必须严格按照“结构化输出”定义返回，不要输出Markdown、标题或其他解释文字。
+
+
+            --------------------------------------------------
+
+            # 一、用户条件
+
+            --------------------------------------------------
+
+
+            用户输入：
+
+
+            高考分数：{{score}}
+
+            选科：{{subject}}
+
+            意向城市：{{city}}
+
+            意向专业：{{major}}
+
+
+            筛选优先级：
+
+
+            选科 > 专业 > 城市 > 分数分档
+
+
+            其中：
+
+
+            1. 分数必须考虑。
+
+            2. 选科必须考虑。
+
+            3. 用户填写意向专业时，必须考虑专业匹配。
+
+            4. 用户填写意向城市时，必须考虑城市匹配。
+
+            5. 用户未填写城市时，不限制城市。
+
+
+            --------------------------------------------------
+
+            # 二、知识库使用规则
+
+            --------------------------------------------------
+
+
+            只能使用知识库检索结果中的真实院校数据。
+
+
+            不得编造：
+
+
+            - 院校名称
+
+            - 城市
+
+            - 投档线
+
+            - 选科要求
+
+            - 推荐专业
+
+            - 招生数据
+
+
+            知识库中不存在的信息不得自行补充。
+
+
+            只有明确包含院校名称、城市、选科要求、投档线、推荐专业等信息的内容，才能作为院校数据。
+
+
+            --------------------------------------------------
+
+            # 三、院校筛选规则
+
+            --------------------------------------------------
+
+
+            必须按照以下顺序筛选：
+
+
+            第一步：选科匹配
+
+            第二步：专业匹配
+
+            第三步：城市匹配
+
+            第四步：计算分数差
+
+            第五步：划分冲刺、稳妥、保底
+
+
+            注意：
+
+
+            分数不能用于提前删除院校。
+
+
+            只有通过“选科 + 专业 + 城市”的院校，才进入后续分档。
+
+
+            --------------------------------------------------
+
+            # 四、选科匹配
+
+            --------------------------------------------------
+
+
+            必须根据知识库中的选科要求判断。
+
+
+            如果用户输入：
+
+
+            物理化学
+
+
+            知识库：
+
+
+            物理+化学
+
+
+            则认为匹配。
+
+
+            如果用户只输入：
+
+
+            物理
+
+
+            知识库要求：
+
+
+            物理+化学
+
+
+            则不能直接认为完全匹配。
+
+
+            此时只能在reason中说明：
+
+
+            “知识库要求物理+化学，而用户目前仅提供物理，选科条件需要进一步确认。”
+
+
+            如果选科明显冲突，则不得推荐。
+
+
+            --------------------------------------------------
+
+            # 五、专业匹配
+
+            --------------------------------------------------
+
+
+            如果用户填写意向专业，必须优先匹配专业。
+
+
+            例如：
+
+
+            用户：计算机
+
+
+            以下可以认为匹配：
+
+
+            - 计算机科学与技术
+
+            - 软件工程
+
+            - 计算机类
+
+
+            以下不属于计算机专业匹配：
+
+
+            - 车辆工程
+
+            - 机械设计制造及其自动化
+
+            - 临床医学
+
+            - 大气科学
+
+
+            不能因为学校分数合适，就用其他专业代替用户意向专业。
+
+
+            如果一所院校同时存在匹配和不匹配专业，只推荐其中明确匹配的专业。
+
+
+            --------------------------------------------------
+
+            # 六、城市匹配
+
+            --------------------------------------------------
+
+
+            如果用户填写了城市：
+
+
+            优先推荐该城市的院校。
+
+
+            如果院校不在用户意向城市，则不得假装城市匹配。
+
+
+            如果用户没有填写城市：
+
+
+            不得将城市作为筛选条件。
+
+
+            --------------------------------------------------
+
+            # 七、分数分档
+
+            --------------------------------------------------
+
+
+            对于已经通过选科、专业、城市筛选的院校：
+
+
+            计算：
+
+
+            score_diff = 用户分数 - 院校投档线
+
+
+            按照以下规则分类：
+
+
+            【冲刺】
+
+
+            用户分数 < 院校投档线
+
+
+            【稳妥】
+
+
+            0 ≤ score_diff ≤ 30
+
+
+            【保底】
+
+
+            score_diff > 30
+
+
+            必须严格按照数字规则分类。
+
+
+            例如：
+
+
+            用户590分：
+
+
+            投档线600 → 冲刺
+
+            投档线588 → 稳妥
+
+            投档线560 → 稳妥
+
+            投档线550 → 保底
+
+
+            不得根据主观判断改变分类。
+
+
+            --------------------------------------------------
+
+            # 八、推荐数量
+
+            --------------------------------------------------
+
+
+            不要为了凑数量强行推荐。
+
+
+            所有符合：
+
+
+            “选科 + 专业 + 城市”
+
+
+            条件的院校都应该保留。
+
+
+            不得主动限制为3所、5所或其他数量。
+
+
+            如果某一个分档没有符合条件的院校，该分档返回空数组。
+
+
+            --------------------------------------------------
+
+            # 九、match_score
+
+            --------------------------------------------------
+
+
+            match_score表示：
+
+
+            “用户条件与该院校及专业的综合匹配程度”。
+
+
+            范围：
+
+
+            0-100
+
+
+            它不是：
+
+
+            - 录取概率
+
+            - 录取成功率
+
+            - 上岸概率
+
+
+            不得将match_score解释为录取概率。
+
+
+            可以综合考虑：
+
+
+            - 选科匹配
+
+            - 专业匹配
+
+            - 城市匹配
+
+            - 分数差距
+
+
+            如果专业明显不匹配，不得给出高匹配度。
+
+
+            --------------------------------------------------
+
+            # 十、推荐理由
+
+            --------------------------------------------------
+
+
+            reason必须简洁。
+
+
+            建议控制在50字以内。
+
+
+            必须根据用户条件和知识库真实数据生成。
+
+
+            例如：
+
+
+            “专业方向匹配，但院校投档线高于当前分数，存在一定冲刺风险。”
+
+
+            不要编造知识库不存在的信息。
+
+
+            --------------------------------------------------
+
+            # 十一、分析内容
+
+            --------------------------------------------------
+
+
+            生成以下四项分析：
+
+
+            major_analysis：
+
+            说明用户意向专业与推荐结果的匹配情况。
+
+
+            city_analysis：
+
+            说明用户意向城市与推荐结果的匹配情况。
+
+
+            score_analysis：
+
+            说明用户分数与推荐院校投档线之间的整体情况。
+
+
+            overall_advice：
+
+            给出整体志愿组合建议。
+
+
+            注意：
+
+
+            不得将整体建议描述为确定性的录取结果。
+
+
+            --------------------------------------------------
+
+            # 十二、没有数据时
+
+            --------------------------------------------------
+
+
+            如果知识库中没有符合条件的院校：
+
+
+            rush返回空数组。
+
+
+            stable返回空数组。
+
+
+            safe返回空数组。
+
+
+            overall_advice说明：
+
+
+            “当前知识库中没有检索到符合当前用户条件的院校数据。”
+
+
+            不得为了填充结果而虚构院校。
+
+
+            --------------------------------------------------
+
+            # 十三、最终检查
+
+            --------------------------------------------------
+
+
+            生成结果前检查：
+
+
+            1. 推荐院校是否全部来自知识库。
+
+            2. 是否满足选科条件。
+
+            3. 是否满足专业条件。
+
+            4. 用户填写城市时是否满足城市条件。
+
+            5. 是否正确计算score_diff。
+
+            6. 是否按照分数差划分冲刺、稳妥、保底。
+
+            7. 是否存在强行推荐。
+
+            8. match_score是否被错误表示为录取概率。
+
+
+            # 最终输出规则
+
+
+            你需要根据用户条件和知识库检索结果完成院校筛选和分析。
+
+
+            系统已经配置了结构化输出格式。
+
+
+            你不要生成JSON Schema。
+
+            你不要输出type、properties、required、enum、description等Schema定义。
+
+            你不要解释输出格式。
+
+            你不要输出Markdown。
+
+            你不要输出代码。
+
+            你不要输出分析过程。
+
+
+            只需要填写结构化输出中的实际数据。
+
+
+            其中：
+
+
+            user_condition：
+
+            填写用户实际输入的数据。
+
+
+            recommendations：
+
+            按照冲刺、稳妥、保底分别填写符合条件的院校。
+
+
+            每所院校必须包含：
+
+            school_name
+
+            city
+
+            score_line
+
+            subject_requirement
+
+            major
+
+            score_diff
+
+            match_score
+
+            reason
+
+
+            analysis：
+
+            填写：
+
+            major_analysis
+
+            city_analysis
+
+            score_analysis
+
+            overall_advice
+
+
+            注意：
+
+
+            score必须输出实际数字，例如620，不要输出"number"。
+
+
+            score_line必须输出实际数字，例如625，不要输出"number"。
+
+
+            score_diff必须输出实际计算结果，例如-5，不要输出"number"。
+
+
+            match_score必须输出0-100之间的实际数字，不要输出"number"。
+
+
+            如果某个分档没有符合条件的院校，直接返回空数组，例如：
+
+
+            "stable": []
+
+
+            不要为了填充结果而虚构院校。
+
+
+            最终只返回符合结构化输出要求的实际数据。
+
+
+            完成检查后，只返回结构化输出。'
+        - edition_type: jinja2
+          id: fbb2161f-80a6-4c9d-a4f9-ee04400d577b
+          jinja2_text: "检索院校：{{ output }}\r\n用户填报信息：\r\n分数: {{ score }}\r\n选科: {{\
+            \ subject }}\r\n城市: {{ city }}\r\n意向专业: {{ major }}"
+          role: user
+          text: ''
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              analysis:
+                additionalProperties: false
+                description: null
+                enum: null
+                properties:
+                  city_analysis:
+                    description: null
+                    enum: null
+                    type: string
+                  major_analysis:
+                    description: null
+                    enum: null
+                    type: string
+                  overall_advice:
+                    type: string
+                  score_analysis:
+                    type: string
+                required:
+                - major_analysis
+                - city_analysis
+                - score_analysis
+                - overall_advice
+                type: object
+              recommendations:
+                additionalProperties: false
+                description: null
+                enum: null
+                properties:
+                  rush:
+                    description: null
+                    enum: null
+                    items:
+                      additionalProperties: false
+                      properties:
+                        city:
+                          description: null
+                          enum: null
+                          type: string
+                        major:
+                          type: string
+                        match_score:
+                          type: number
+                        reason:
+                          description: null
+                          enum: null
+                          type: string
+                        school_name:
+                          description: null
+                          enum: null
+                          type: string
+                        score_diff:
+                          type: number
+                        score_line:
+                          type: number
+                        subject_requirement:
+                          type: string
+                      required:
+                      - school_name
+                      - city
+                      - score_line
+                      - subject_requirement
+                      - major
+                      - score_diff
+                      - match_score
+                      - reason
+                      type: object
+                    type: array
+                  safe:
+                    description: null
+                    enum: null
+                    items:
+                      additionalProperties: false
+                      properties:
+                        city:
+                          type: string
+                        major:
+                          description: null
+                          enum: null
+                          type: string
+                        match_score:
+                          description: null
+                          enum: null
+                          type: number
+                        reason:
+                          description: null
+                          enum: null
+                          type: string
+                        school_name:
+                          type: string
+                        score_diff:
+                          description: null
+                          enum: null
+                          type: number
+                        score_line:
+                          type: number
+                        subject_requirement:
+                          type: string
+                      required:
+                      - school_name
+                      - city
+                      - score_line
+                      - subject_requirement
+                      - major
+                      - score_diff
+                      - match_score
+                      - reason
+                      type: object
+                    type: array
+                  stable:
+                    description: null
+                    enum: null
+                    items:
+                      additionalProperties: false
+                      properties:
+                        city:
+                          type: string
+                        major:
+                          description: null
+                          enum: null
+                          type: string
+                        match_score:
+                          type: number
+                        reason:
+                          description: null
+                          enum: null
+                          type: string
+                        school_name:
+                          description: null
+                          enum: null
+                          type: string
+                        score_diff:
+                          type: number
+                        score_line:
+                          description: null
+                          enum: null
+                          type: number
+                        subject_requirement:
+                          description: null
+                          enum: null
+                          type: string
+                      required:
+                      - school_name
+                      - city
+                      - score_line
+                      - subject_requirement
+                      - major
+                      - score_diff
+                      - match_score
+                      - reason
+                      type: object
+                    type: array
+                required:
+                - rush
+                - stable
+                - safe
+                type: object
+              user_condition:
+                additionalProperties: false
+                description: null
+                enum: null
+                properties:
+                  city:
+                    description: null
+                    enum: null
+                    type: string
+                  major:
+                    description: null
+                    enum: null
+                    type: string
+                  score:
+                    description: null
+                    enum: null
+                    type: number
+                  subject:
+                    description: null
+                    enum: null
+                    type: string
+                required:
+                - score
+                - subject
+                - city
+                - major
+                type: object
+            required:
+            - user_condition
+            - recommendations
+            - analysis
+            type: object
+        structured_output_enabled: true
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 86
+      id: '1789898205275'
+      position:
+        x: 1880.1517744428618
+        y: 347.1985040506202
+      positionAbsolute:
+        x: 1880.1517744428618
+        y: 347.1985040506202
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        outputs:
+        - value_selector:
+          - '1789898205275'
+          - structured_output
+          value_type: object
+          variable: data
+        selected: false
+        title: 输出 2
+        type: end
+      height: 50
+      id: '1789898330788'
+      position:
+        x: 2190.8833087161256
+        y: 347.1985040506202
+      positionAbsolute:
+        x: 2190.8833087161256
+        y: 347.1985040506202
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        advanced_settings:
+          group_enabled: false
+          groups:
+          - groupId: 8ba42e15-b61e-4c8c-ac45-fd6db268f993
+            group_name: Group1
+            output_type: array[object]
+            variables:
+            - - '1789872794555'
+              - result
+            - - '1789895729761'
+              - result
+        output_type: array[object]
+        selected: false
+        title: 变量聚合器
+        type: variable-aggregator
+        variables:
+        - - '1789872794555'
+          - result
+        - - '1789895729761'
+          - result
+      height: 132
+      id: '1789979375635'
+      position:
+        x: 1565.191627796542
+        y: 335.9276131357839
+      positionAbsolute:
+        x: 1565.191627796542
+        y: 335.9276131357839
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    viewport:
+      x: -758.6186743218983
+      y: 164.91723802432008
+      zoom: 0.4811485270003237
+  rag_pipeline_variables: []
