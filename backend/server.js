@@ -72,9 +72,12 @@ app.post("/api/plan", async (req, res) => {
 // 3. 启动服务器
 // ================================
 const PORT = process.env.PORT || 3000;
+const HOST = "localhost";
+const SERVER_URL = `http://${HOST}:${PORT}`;
 
 app.listen(PORT, "0.0.0.0", () => {
     console.log("=================================");
-    console.log(`AI志愿规划助手已启动，端口：${PORT}`);
+    console.log(`AI志愿规划助手已启动，访问地址：${SERVER_URL}`);
+    console.log(`本地端口：${PORT}`);
     console.log("=================================");
 });
